@@ -1,34 +1,69 @@
-﻿@{
+﻿@model StudentTracker.ViewModels.LoginModel
+@{
     ViewBag.Title = "Login";
+    Layout = "../shared/_layoutbluemoon.cshtml";
 }
+<style type="text/css">
+    .form-signin {
+        max-width: 500px;
+        min-width: 150px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    }
 
-<form class="form-horizontal" action='' method="POST">
-    <fieldset>
-        <div id="legend">
-            <legend class="">Login</legend>
-        </div>
-        <div class="control-group">
-            <!-- Username -->
-            <label class="control-label" for="username">Username</label>
-            <div class="controls">
-                <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+            margin-bottom: 10px;
+        }
+
+        .form-signin input[type="text"],
+        .form-signin input[type="password"] {
+            font-size: 16px;
+            height: auto;
+            padding: 7px 9px;
+        }
+</style>
+<div class="row-fluid">
+
+    <div class="sign-in-container">
+        @using (Html.BeginForm("login", "account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin login-wrapper" }))
+        {
+            
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="header">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h3>Login<img src="~/Content/themes/custom/img/logo1.png" alt="Logo" class="pull-right" /></h3>
+                        <p>Fill out the form below to login.</p>
+                    </div>
+                </div>
+
             </div>
-        </div>
-
-        <div class="control-group">
-            <!-- Password-->
-            <label class="control-label" for="password">Password</label>
-            <div class="controls">
-                <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "input-block-level", @placeholder = "Email address" })
+            @Html.ValidationMessageFor(m => m.UserName)
+            @Html.PasswordFor(m => m.Password, new { @class = "input-block-level", @placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password)
+            
+            <label class="checkbox">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+            </label>
+            <div class="actions">
+                <button class="btn btn-danger" type="submit">Sign in</button>
+                <a class="link" href="#" data-original-title="">Forgot Password?</a>
+                <div class="clearfix"></div>
             </div>
-        </div>
+        }
+    </div>
 
-
-        <div class="control-group">
-            <!-- Button -->
-            <div class="controls">
-                <button class="btn btn-success">Login</button>
-            </div>
-        </div>
-    </fieldset>
-</form>
+</div>
