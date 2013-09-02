@@ -6,7 +6,9 @@
     using System.Web;
     using System.ComponentModel.DataAnnotations;
     using StudentTracker.Core.Entities;
-
+    using System.ComponentModel.DataAnnotations.Schema;
+     
+    [Table("Roles")]
     public class Role
     {
         [Key]
