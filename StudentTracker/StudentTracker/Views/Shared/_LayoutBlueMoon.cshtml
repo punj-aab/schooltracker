@@ -51,7 +51,7 @@
         </a>
         @if (User.Identity.IsAuthenticated)
         {
-            Html.RenderAction("../shared/_LayoutBlueMoon.cshtml");
+            @Html.Partial("_LoginPartialCustom");
         }
         else
         {

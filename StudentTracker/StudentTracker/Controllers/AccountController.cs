@@ -32,6 +32,7 @@ namespace StudentTracker.Controllers
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 Session["UserId"] = Convert.ToInt32(WebSecurity.GetUser(model.UserName).ProviderUserKey);
+                returnUrl = string.IsNullOrEmpty(returnUrl) ? "/home/index" : returnUrl;
                 return RedirectToLocal(returnUrl);
             }
 
@@ -43,8 +44,8 @@ namespace StudentTracker.Controllers
         //
         // POST: /Account/LogOff
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
+       // [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
