@@ -78,7 +78,7 @@ namespace StudentTracker.Controllers
                     MembershipCreateStatus status;
                     membership.CreateUser(model.Username, model.Password, model.Email, string.Empty, string.Empty, false, null, out status);
                     if (status == MembershipCreateStatus.Success)
-                        EmailManager.SendConfirmationEmail(model.Username);
+                      //  EmailManager.SendConfirmationEmail(model.Username);
                     return RedirectToAction("Confirmation", "Account");
                 }
                 catch (MembershipCreateUserException e)
